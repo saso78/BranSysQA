@@ -1,14 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BranSys.BaseTest
 {
@@ -28,7 +23,7 @@ namespace BranSys.BaseTest
 
             ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
             {
-               
+
             });
             Logger = loggerFactory.CreateLogger("TestFixture");
         }
@@ -68,22 +63,6 @@ namespace BranSys.BaseTest
                 Assert.Fail("No alert was seen within the specified wait time.");
             }
         }
-        public void SendRandomNumbers(int length, int delayInMilliseconds)
-        {
-            string randomNumbers = GenerateRandomNumbers(length);
-            SendKeys(randomNumbers, delayInMilliseconds);
-        }
-
-        private string GenerateRandomNumbers(int length)
-        {
-            string numbers = "0123456789";
-            string result = "";
-            for (int i = 0; i < length; i++)
-            {
-                result += numbers[_random.Next(numbers.Length)];
-            }
-            return result;
-        }
 
         public void SendKeys(string keys, int delayInMilliseconds)
         {
@@ -98,16 +77,6 @@ namespace BranSys.BaseTest
             action.SendKeys(key).Perform();
             Thread.Sleep(delayInMilliseconds);
         }
-       
-       
-        
-        public void RightClickElement(By locator)
-        {
-            wait.Until(ExpectedConditions.ElementIsVisible(locator));
-            IWebElement element = Driver.FindElement(locator);
-            Actions actions = new Actions(Driver);
-            actions.ContextClick(element).Perform();
-        }
         public void Login(string username, string password)
         {
             IWebElement userNameField = Driver.FindElement(By.Id("input-204"));
@@ -116,7 +85,6 @@ namespace BranSys.BaseTest
             userPasswordField.SendKeys(password);
             IWebElement loginButton = Driver.FindElement(By.XPath("/html/body/div[1]/div/div/div/div/div/div/div/div/div[2]/div[2]/form/div[2]/div[1]/button"));
             loginButton.Click();
-            
         }
 
         public void Dispose()

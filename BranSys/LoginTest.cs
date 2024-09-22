@@ -37,14 +37,14 @@ namespace BranSys
         }
 
         [Fact]
-        [TestPriority(2)] // Adjust priority as needed
+        [TestPriority(2)]
         public void TestInvalidCredentialsAndErrorMessage()
         {
             try
             {
                 // Explicit wait for the fields to be visible
-                _fixture.wait.Until(ExpectedConditions.ElementIsVisible(By.Id("input-204"))); // Username field
-                _fixture.wait.Until(ExpectedConditions.ElementIsVisible(By.Id("input-207"))); // Password field
+                _fixture.wait.Until(ExpectedConditions.ElementIsVisible(By.Id("input-204")));
+                _fixture.wait.Until(ExpectedConditions.ElementIsVisible(By.Id("input-207")));
 
                 // Input invalid credentials
                 string invalidUsername = "wronguser";
@@ -72,7 +72,7 @@ namespace BranSys
                 // Assert that the error message is displayed
                 Assert.Contains("Incorrect email/username or password", errorMessage);
 
-                // If we reach this point, the test should pass
+                // If we see the error message, the test should pass
                 _fixture.Logger.LogInformation("Invalid credentials test passed with expected error message.");
             }
             catch (Exception ex)
