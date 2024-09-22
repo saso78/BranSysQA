@@ -15,7 +15,7 @@ namespace BranSys.BaseTest
     public class TestFixture : IDisposable
     {
         public IWebDriver Driver { get; private set; }
-        private WebDriverWait wait;
+        public WebDriverWait wait;
         public ILogger Logger { get; private set; }
         private readonly Random _random = new Random();
 
@@ -39,11 +39,11 @@ namespace BranSys.BaseTest
             wait.Until(ExpectedConditions.InvisibilityOfElementLocated(locator));
         }
 
-        public bool IsElementPresent(By locator)
+        public bool IsElementPresent(By name)
         {
             try
             {
-                Driver.FindElement(locator);
+                Driver.FindElement(name);
                 return true;
             }
             catch (NoSuchElementException)
