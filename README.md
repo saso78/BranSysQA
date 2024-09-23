@@ -12,6 +12,7 @@ This project is a C# .NET Core application designed to test a login page for the
 ## Project Structure
 - **BaseTest.cs**: Contains the `TestFixture` class, which initializes the Selenium WebDriver, manages waits, and provides utility methods for interacting with the browser.
 - **BrowserUtility.cs**: This would typically contain helper functions for browser-related operations.
+- **TestOrder.cs**:Contains a method to give order of execution to the tests.
 - **LoginTest.cs**: Contains the test cases that validate the login functionality.
 
 ## Test Scenarios
