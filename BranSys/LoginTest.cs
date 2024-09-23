@@ -85,14 +85,14 @@ namespace BranSys
 
                 string emptyUsername = " ";
                 string emptyPassword = " ";
-                _fixture.Driver.FindElement(By.Id("input-204")).SendKeys(invalidUsername);
-                _fixture.Driver.FindElement(By.Id("input-207")).SendKeys(invalidPassword);
+                _fixture.Driver.FindElement(By.Id("input-204")).SendKeys(emptyUsername);
+                _fixture.Driver.FindElement(By.Id("input-207")).SendKeys(emptyPassword);
 
                 var usernameFieldValue = _fixture.Driver.FindElement(By.Id("input-204")).GetAttribute("value");
                 var passwordFieldValue = _fixture.Driver.FindElement(By.Id("input-207")).GetAttribute("value");
 
-                Assert.Equal(invalidUsername, usernameFieldValue);
-                Assert.Equal(invalidPassword, passwordFieldValue);
+                Assert.Equal(emptyUsername, usernameFieldValue);
+                Assert.Equal(emptyPassword, passwordFieldValue);
 
                 var passwordField = _fixture.Driver.FindElement(By.Id("input-207"));
                 passwordField.SendKeys(Keys.Enter);
