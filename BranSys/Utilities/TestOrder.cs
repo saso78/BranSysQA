@@ -12,7 +12,6 @@ namespace BranSys.Utilities
     {
         public IEnumerable<TTestCase> OrderTestCases<TTestCase>(IEnumerable<TTestCase> testCases) where TTestCase : ITestCase
         {
-            // Order tests by the custom attribute 'TestPriority'
             return testCases.OrderBy(testCase =>
             {
                 var priorityAttribute = testCase.TestMethod.Method
