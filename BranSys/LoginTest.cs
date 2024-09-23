@@ -41,15 +41,10 @@ namespace BranSys
         {
             try
             {
-                _fixture.wait.Until(ExpectedConditions.ElementIsVisible(By.Id("input-204")));
-                _fixture.wait.Until(ExpectedConditions.ElementIsVisible(By.Id("input-207")));
-
-                _fixture.Driver.FindElement(By.Id("input-204")).Clear();
-                _fixture.Driver.FindElement(By.Id("input-207")).Clear();
-
                 string invalidUsername = "wronguser";
                 string invalidPassword = "wrongpassword";
-                _fixture.Driver.FindElement(By.Id("input-204")).SendKeys(invalidUsername);
+                
+                _fixture.Driver.FindElement(By.Id("input-204")).SendKeys(invalidUsername);                
                 _fixture.Driver.FindElement(By.Id("input-207")).SendKeys(invalidPassword);
 
                 var usernameFieldValue = _fixture.Driver.FindElement(By.Id("input-204")).GetAttribute("value");
@@ -82,6 +77,6 @@ namespace BranSys
                 _fixture.Driver.FindElement(By.Id("input-207")).Clear();
             }
         }
-        
+
     }
 }
