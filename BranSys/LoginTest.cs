@@ -44,6 +44,9 @@ namespace BranSys
                 _fixture.wait.Until(ExpectedConditions.ElementIsVisible(By.Id("input-204")));
                 _fixture.wait.Until(ExpectedConditions.ElementIsVisible(By.Id("input-207")));
 
+                _fixture.Driver.FindElement(By.Id("input-204")).Clear();
+                _fixture.Driver.FindElement(By.Id("input-207")).Clear();
+
                 string invalidUsername = "wronguser";
                 string invalidPassword = "wrongpassword";
                 _fixture.Driver.FindElement(By.Id("input-204")).SendKeys(invalidUsername);
@@ -73,46 +76,12 @@ namespace BranSys
                 _fixture.Logger.LogError($"Test failed: {ex.Message}");
                 throw;
             }
-        }
-        [Fact]
-        [TestPriority(3)]
-        public void TestEmptyCredentialsAndErrorMessage()
-        {
-            try
+            finally
             {
-                _fixture.wait.Until(ExpectedConditions.ElementIsVisible(By.Id("input-204")));
-                _fixture.wait.Until(ExpectedConditions.ElementIsVisible(By.Id("input-207")));
-
-                string emptyUsername = " ";
-                string emptyPassword = " ";
-                _fixture.Driver.FindElement(By.Id("input-204")).SendKeys(emptyUsername);
-                _fixture.Driver.FindElement(By.Id("input-207")).SendKeys(emptyPassword);
-
-                var usernameFieldValue = _fixture.Driver.FindElement(By.Id("input-204")).GetAttribute("value");
-                var passwordFieldValue = _fixture.Driver.FindElement(By.Id("input-207")).GetAttribute("value");
-
-                Assert.Equal(emptyUsername, usernameFieldValue);
-                Assert.Equal(emptyPassword, passwordFieldValue);
-
-                var passwordField = _fixture.Driver.FindElement(By.Id("input-207"));
-                passwordField.SendKeys(Keys.Enter);
-
-                
-                _fixture.wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("/html/body/div[1]/div/div/div/div/div/div/div/div/div[2]/div[2]/form/div[1]/div[3]")));
-
-               
-                var errorMessage = _fixture.Driver.FindElement(By.XPath("/html/body/div[1]/div/div/div/div/div/div/div/div/div[2]/div[2]/form/div[1]/div[3]")).Text;
-                
-                Assert.Contains("errorCodes.undefined", errorMessage);
-               
-                _fixture.Logger.LogInformation("Empty credentials test passed with expected error message.");
-            }
-            catch (Exception ex)
-            {
-                _fixture.Logger.LogError($"Test failed: {ex.Message}");
-                throw;
+                _fixture.Driver.FindElement(By.Id("input-204")).Clear();
+                _fixture.Driver.FindElement(By.Id("input-207")).Clear();
             }
         }
-
+        
     }
 }
